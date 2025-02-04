@@ -29,4 +29,22 @@ abstract class Player {
     public function getSkill(): int {
         return $this->skill;
     }
+
+    /**
+     * Get the luck of the player
+     * 
+     * @return int
+     */
+    public function getLuck(): int
+    {
+        return rand(0, 25);
+    }
+
+    /**
+     * Get the total skill of the player
+     * 
+     * @return int
+     */
+    abstract public function getTotalSkill(): int;
+    
 }

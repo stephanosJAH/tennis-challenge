@@ -1,0 +1,320 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Documentation",
+        "description": "API Documentation for handling tournaments",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/tournaments": {
+            "get": {
+                "tags": [
+                    "Tournament"
+                ],
+                "summary": "Show all tournaments",
+                "operationId": "d6d13007f7657d700fa0fff0acd91dac",
+                "parameters": [
+                    {
+                        "name": "name[operator]",
+                        "in": "query",
+                        "description": "Filter tournaments by name (like, eq) : name[eq|like]=value",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "eq": {
+                                "summary": "Filter tournaments by exact name",
+                                "value": "eq"
+                            },
+                            "like": {
+                                "summary": "Filter tournaments by partial name",
+                                "value": "like"
+                            }
+                        }
+                    },
+                    {
+                        "name": "gender[operator]",
+                        "in": "query",
+                        "description": "Filter tournaments by gender (eq, in) : gender[eq|in]=value|value1,value2",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "eq": {
+                                "summary": "Filter tournaments by exact gender",
+                                "value": "eq"
+                            },
+                            "in": {
+                                "summary": "Filter tournaments based on a list by gender.",
+                                "value": "in"
+                            }
+                        }
+                    },
+                    {
+                        "name": "type[operator]",
+                        "in": "query",
+                        "description": "Filter tournaments by type (eq, in) : type[eq|in]=value|value1,value2",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "eq": {
+                                "summary": "Filter tournaments by exact type",
+                                "value": "eq"
+                            },
+                            "in": {
+                                "summary": "Filter tournaments based on a list by type.",
+                                "value": "in"
+                            }
+                        }
+                    },
+                    {
+                        "name": "winner_name[operator]",
+                        "in": "query",
+                        "description": "Filter tournaments by type (eq, like) : type[eq|like]=value",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "eq": {
+                                "summary": "Filter tournaments by exact type",
+                                "value": "eq"
+                            },
+                            "like": {
+                                "summary": "Filter tournaments by partial type",
+                                "value": "like"
+                            }
+                        }
+                    },
+                    {
+                        "name": "winner_skill[operator]",
+                        "in": "query",
+                        "description": "Filter tournaments by winner_skill (eq, gt, lt, gte, lte) : winner_skill[eq|gt|lt|gte|lte]=value",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "eq": {
+                                "summary": "Filter tournaments by exact winner_skill",
+                                "value": "eq"
+                            },
+                            "gt": {
+                                "summary": "Filter tournaments by winner_skill greater than value",
+                                "value": "gt"
+                            },
+                            "lt": {
+                                "summary": "Filter tournaments by winner_skill less than value",
+                                "value": "lt"
+                            },
+                            "gte": {
+                                "summary": "Filter tournaments by winner_skill greater than or equal to value",
+                                "value": "gte"
+                            },
+                            "lte": {
+                                "summary": "Filter tournaments by winner_skill less than or equal to value",
+                                "value": "lte"
+                            }
+                        }
+                    },
+                    {
+                        "name": "created_at[operator]",
+                        "in": "query",
+                        "description": "Filter tournaments by created_at (like, eq, gt, lt, gte, lte) : created_at[like|eq|gt|lt|gte|lte]=value",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "like": {
+                                "summary": "Filter tournaments by partial created_at",
+                                "value": "like"
+                            },
+                            "eq": {
+                                "summary": "Filter tournaments by exact created_at",
+                                "value": "eq"
+                            },
+                            "gt": {
+                                "summary": "Filter tournaments by created_at greater than value",
+                                "value": "gt"
+                            },
+                            "lt": {
+                                "summary": "Filter tournaments by created_at less than value",
+                                "value": "lt"
+                            },
+                            "gte": {
+                                "summary": "Filter tournaments by created_at greater than or equal to value",
+                                "value": "gte"
+                            },
+                            "lte": {
+                                "summary": "Filter tournaments by created_at less than or equal to value",
+                                "value": "lte"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A list of tournaments",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Tournament"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Tournament"
+                ],
+                "summary": "Store a tournament",
+                "operationId": "ec99f955502248b1cb2c9b5718a5afc1",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreTournamentRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Tournament played",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Tournament"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/tournaments/{id}": {
+            "get": {
+                "tags": [
+                    "Tournament"
+                ],
+                "summary": "Show a tournament",
+                "operationId": "551f2bae3b61410cea0c01c6502e0143",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A single tournament",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Tournament"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Tournament": {
+                "properties": {
+                    "id": {
+                        "description": "Class TournamentController.",
+                        "type": "integer"
+                    },
+                    "gender": {
+                        "type": "string"
+                    },
+                    "winner_name": {
+                        "type": "string"
+                    },
+                    "winner_skill": {
+                        "type": "integer"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "StoreTournamentRequest": {
+                "required": [
+                    "type",
+                    "gender",
+                    "players"
+                ],
+                "properties": {
+                    "type": {
+                        "type": "string"
+                    },
+                    "gender": {
+                        "type": "string"
+                    },
+                    "players": {
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "example": "Test Name"
+                                },
+                                "skill": {
+                                    "type": "integer",
+                                    "example": 80
+                                },
+                                "extra1": {
+                                    "type": "integer",
+                                    "example": 10
+                                },
+                                "extra2": {
+                                    "type": "integer",
+                                    "example": 5
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Tournament",
+            "description": "API Endpoints of handling tournaments"
+        }
+    ]
+}

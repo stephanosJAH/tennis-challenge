@@ -13,19 +13,19 @@ class PlayerFactory {
 	/**
 	 * Create a new player instance
 	 * 
-	 * @param string $type
+	 * @param string $gender
 	 * @param string $name
 	 * @param int $skill
-	 * @param int $extra1
+	 * @param int $extra1 [male - female]
+	 * @param int $extra2 [male]
 	 * 
 	 * @return Player
 	 */
-    public static function create(string $type, string $name, int $skill, int $extra1, int $extra2 = 0): Player 
-	{
-
-        if ($type === 'male') {
+    public static function create(string $gender, string $name, int $skill, int $extra1, int $extra2 = 0): Player 
+    {
+        if ($gender === 'male') {
             return new MalePlayer($name, $skill, $extra1, $extra2);
-        } elseif ($type === 'female') {
+        } elseif ($gender === 'female') {
             return new FemalePlayer($name, $skill, $extra1);
         }
 
