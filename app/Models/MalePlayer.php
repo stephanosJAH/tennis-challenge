@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-class MalePlayer extends Player {
-
+class MalePlayer extends Player 
+{
     private int $strength;
     private int $speed;
 

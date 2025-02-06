@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-abstract class Player {
+abstract class Player 
+{
 
     protected string $name;
     protected int $skill;

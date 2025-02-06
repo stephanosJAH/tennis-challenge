@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-class FemalePlayer extends Player {
-    
+class FemalePlayer extends Player 
+{
     private int $reactionTime;
 
     public function __construct(string $name, int $skill, int $reactionTime) {

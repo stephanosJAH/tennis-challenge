@@ -8,8 +8,8 @@ use App\Models\Player;
 
 use Exception;
 
-class PlayerFactory {
-
+class PlayerFactory 
+{
 	/**
 	 * Create a new player instance
 	 * 

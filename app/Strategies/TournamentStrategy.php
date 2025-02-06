@@ -12,6 +12,7 @@ namespace App\Strategies;
  * 
  * @package App\Strategies
  */
-interface TournamentStrategy {
+interface TournamentStrategy 
+{
     public function determineWinner(array $team1, array $team2): array;
 }

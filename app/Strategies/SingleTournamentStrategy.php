@@ -5,7 +5,8 @@ namespace App\Strategies;
 use App\Models\Player;
 use Illuminate\Support\Facades\Log;
 
-class SingleTournamentStrategy implements TournamentStrategy {
+class SingleTournamentStrategy implements TournamentStrategy 
+{
 
 	/**
 	 * Determine the winner of a match between two players

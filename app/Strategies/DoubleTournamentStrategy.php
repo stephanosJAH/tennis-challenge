@@ -4,8 +4,9 @@ namespace App\Strategies;
 
 use Illuminate\Support\Facades\Log;
 
-class DoubleTournamentStrategy implements TournamentStrategy {
-
+class DoubleTournamentStrategy implements TournamentStrategy 
+{
+    
     /**
      * Determine the winner of a match between two couples or teams
      * on basis of their total skill
