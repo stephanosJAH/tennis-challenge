@@ -11,14 +11,14 @@ class TournamentPlayed
     use Dispatchable, SerializesModels;
 
     public array $payload;
-    public Player $winner;
+    public array $winner;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(array $payload, Player $winner)
+    public function __construct(array $payload, array $winner)
     {
         $this->payload = $payload;
         $this->winner = $winner;

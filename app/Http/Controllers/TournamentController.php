@@ -10,6 +10,7 @@ use App\Services\TournamentServiceFactory;
 use App\Events\TournamentPlayed;
 use App\Http\Resources\TournamentResource;
 use App\Filters\TournamentFilter;
+use App\Traits\PlayerHelpers;
 
 /**
  * Class TournamentController.
@@ -43,6 +44,8 @@ use App\Filters\TournamentFilter;
 
 class TournamentController extends Controller 
 {
+    use PlayerHelpers;
+
 	public function __construct(
 		protected TournamentFilter $filter
 	)
@@ -201,13 +204,19 @@ class TournamentController extends Controller
 
 			$tournamentService = TournamentServiceFactory::create($payload['type']);
 
-			$winner = $tournamentService->playTournament($payload['gender'], $payload['players']);	
+			$winner = $tournamentService->playTournament($payload['type'], $payload['gender'], $payload['players']);	
 			
             event(new TournamentPlayed($payload, $winner));
 		
-			return response()->json(["winner" => $winner->getName(), "skill" => $winner->getSkill()]);
+			return response()->json([
+                "winner" => $this->getName($winner),
+                "skill" => $this->getSkill($winner)
+            ]);
 		} catch (\Exception $e) {
-			return response()->json(["error" => $e->getMessage()], 500);
+			return response()->json([
+                "error" => $e->getMessage()], 
+                500
+            );
 		}
     }
 }

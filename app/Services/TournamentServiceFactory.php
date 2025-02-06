@@ -29,8 +29,6 @@ class TournamentServiceFactory
      */
     private static function getStrategy(string $type): TournamentStrategy
     {
-        return new SingleTournamentStrategy();
-        
         switch ($type) {
             case 'single':
                 return new SingleTournamentStrategy();

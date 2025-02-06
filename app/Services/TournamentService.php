@@ -4,78 +4,93 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Log;
 
-use App\Models\Player;
-
 use App\Strategies\TournamentStrategy;
 use App\Factories\PlayerFactory;
+use App\Traits\PlayerHelpers;
 
-class TournamentService {
+class TournamentService 
+{
+	use PlayerHelpers;
 
     private TournamentStrategy $strategy;
 
     public function __construct(TournamentStrategy $strategy) {
-        $this->strategy = $strategy;
+		$this->strategy = $strategy;
     }
 
 	/**
 	 * Play a tournament
 	 * 
-	 * @param array $players
-	 * 
-	 * @return Player
-	 */
-	public function playTournament(string $gender,  array $players): Player 
-	{
-		$players = $this->preparePlayers($gender, $players);
-
-		while (count($players) > 1) {
-			Log::info("Playing round with " . count($players) . " players");
-			
-			$winners = [];
-			
-			for ($i = 0; $i < count($players); $i += 2) {
-				$winner = $this->playMatch($players[$i], $players[$i + 1]);
-				Log::info("{$players[$i]->getName()} vs {$players[$i + 1]->getName()} winner is {$winner->getName()}");
-				$winners[] = $winner;
-			}
-			
-			$players = $winners;
-		}
-
-		Log::info("** {$players[0]->getName()} wins the tournament **");
-
-		return $players[0];
-	}
-
-	/**
-	 * Prepare players
-	 * 
+	 * @param string $type
 	 * @param string $gender
 	 * @param array $players
 	 * 
 	 * @return array
 	 */
-	protected function preparePlayers(string $gender, array $players): array 
+	public function playTournament(string $type, string $gender,  array $players): array 
 	{
-		$preparedPlayers = [];
+		$teams = $this->prepareTeamsPlayers($type, $gender, $players);
 
-		foreach ($players as $player) {
-			$preparedPlayers[] = PlayerFactory::create($gender, $player[0], $player[1], $player[2], $player[3] ?? 0);
+		while (count($teams) > 1) {
+			Log::info("Playing round with " . count($teams) . " teams");
+			
+			$winners = [];
+			
+			for ($i = 0; $i < count($teams); $i += 2) {
+				$winner = $this->playMatch($teams[$i], $teams[$i + 1]);
+				Log::info("{$this->getNameObject($teams[$i])} vs {$this->getNameObject($teams[$i+1])} winner is {$this->getNameObject($winner)}");
+				$winners[] = $winner;
+			}
+			
+			$teams = $winners;
 		}
 
-		return $preparedPlayers;
+		Log::info("** {$this->getName($teams)} win the tournament **", );
 
+		return $teams;
 	}
 
 	/**
-	 * Play a match between two players
+	 * Prepare players for the tournament
 	 * 
-	 * @param Player $player1
-	 * @param Player $player2
+	 * @param string $type
+	 * @param string $gender
+	 * @param array $players
 	 * 
-	 * @return Player
+	 * @return array
 	 */
-	protected function playMatch(Player $player1, Player $player2): Player {
-		return $this->strategy->determineWinner($player1, $player2);
+	protected function prepareTeamsPlayers(string $type, string $gender, array $players): array 
+	{
+		$preparedPlayers = [];
+
+		if ($type === 'single') {
+			foreach ($players as $player) {
+					$preparedPlayers[] = [PlayerFactory::create($gender, $player[0], $player[1], $player[2], $player[3] ?? 0)];
+			}
+		}
+
+		if ($type === 'double') {
+			for ($i = 0; $i < count($players); $i += 2) {
+				$preparedPlayers[] = [
+					PlayerFactory::create($gender, $players[$i][0], $players[$i][1], $players[$i][2], $players[$i][3] ?? 0),
+					PlayerFactory::create($gender, $players[$i+1][0], $players[$i+1][1], $players[$i+1][2], $players[$i+1][3] ?? 0)
+				];
+			}
+		}
+
+		return $preparedPlayers;
+	}
+
+	/**
+	 * Play a match 
+	 * 
+	 * 
+	 * @param array $team1 <List of Player>
+	 * @param array $team2 <List of Player>
+	 * 
+	 * @return array
+	 */
+	protected function playMatch(array $team1, array $team2): array {
+		return $this->strategy->determineWinner($team1, $team2);
 	}
 }

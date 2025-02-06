@@ -305,17 +305,17 @@ class TournamentControllerTest extends TestCase
     }
 
     /**
-     * play a tournament
+     * play a tournament single
      *
      * @return void
      */
     #[\PHPUnit\Framework\Attributes\Test]
-    public function get_tournament_play() : void
+    public function get_tournament_play_single() : void
     {
         $payload = [
             'name'=> 'torneo ' . rand(1, 100),
             'gender'=> 'male',
-            'type'=> 'double',
+            'type'=> 'single',
             'date'=> '2024-02-01',
             'players'=> [
                 ['Juan', 45, 10, 5],
@@ -337,4 +337,36 @@ class TournamentControllerTest extends TestCase
         ]);
     }
 
+    /**
+     * play a tournament double
+     *
+     * @return void
+     */
+    #[\PHPUnit\Framework\Attributes\Test]
+    public function get_tournament_play_double() : void
+    {
+        $payload = [
+            'name'=> 'torneo ' . rand(1, 100),
+            'gender'=> 'male',
+            'type'=> 'double',
+            'date'=> '2024-02-01',
+            'players'=> [
+                ['Juan', 45, 10, 5],
+                ['Pedro', 45, 8, 6],
+                ['Carlos', 34, 15, 7],
+                ['Luis', 61, 25, 7],
+                ['Test', 100, 25, 4],
+                ['Jesus', 100, 25, 5],
+                ['LAu', 43, 1, 2],
+                ['Mica', 55, 8, 4]
+            ]
+        ];
+
+        $response = $this->post('api/tournaments', $payload);
+        $response->assertStatus(200);
+        $response->assertJsonFragment([
+            "winner" => "Test - Jesus",
+            "skill" => 200
+        ]);
+    }
 }
