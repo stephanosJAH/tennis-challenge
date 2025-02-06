@@ -53,7 +53,6 @@ class StoreTournamentRequest extends FormRequest
                 'required', 
                 'array', 
                 'min:2',
-                // validar la cantidad de jugadores debe ser potencia de 2
                 function ($attribute, $value, $fail) {
                     if (count($value) & (count($value) - 1))
                         $fail('La cantidad de jugadores debe ser potencia de 2');
