@@ -22,6 +22,7 @@ class TournamentResource extends JsonResource
             'players' => json_decode($this->players),
             'winner_name' => $this->winner_name,
             'winner_skill' => $this->winner_skill,
+            'date' => $this->date,
             'created_at' => $this->created_at,
         ];
     }

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('players');
             $table->string('winner_name');
             $table->integer('winner_skill'); 
+            $table->date('date');
 
             $table->timestamps();
         });

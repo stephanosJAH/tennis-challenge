@@ -18,6 +18,7 @@ class Tournament extends Model
         'players',
         'winner_name',
         'winner_skill',
+        'date',
     ];
 
 

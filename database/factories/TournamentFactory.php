@@ -17,14 +17,14 @@ class TournamentFactory extends Factory
     public function definition(): array
     {
         $fakePlayers = [
-                ["Juan", 80, 10, 5],
-                ["Pedro", 75, 8, 6],
-                ["Carlos", 90, 15, 7],
-                ["Luis", 70, 25, 7],
-                ["Test", 90, 8, 4],
-                ["Jesus", 100, 9, 5],
-                ["LAu", 98, 1, 2],
-                ["Mica", 99, 8, 4]
+            ["Juan", 80, 10, 5],
+            ["Pedro", 75, 8, 6],
+            ["Carlos", 90, 15, 7],
+            ["Luis", 70, 25, 7],
+            ["Test", 90, 8, 4],
+            ["Jesus", 100, 9, 5],
+            ["LAu", 98, 1, 2],
+            ["Mica", 99, 8, 4]
         ];
 
         $fakeWinner = $fakePlayers[array_rand($fakePlayers)];
@@ -36,7 +36,7 @@ class TournamentFactory extends Factory
             'players' => json_encode($fakePlayers),
             'winner_name' => $fakeWinner[0],
             'winner_skill' => $fakeWinner[1],
-            'created_at' => now(),
+            'date' => $this->faker->date()
         ];
     }
 }

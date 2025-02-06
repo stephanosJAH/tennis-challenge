@@ -23,7 +23,8 @@ class SaveTournament
             'type' => $event->payload['type'],
             'players' => json_encode($event->payload['players']),
             'winner_name' => $event->winner->getName(),
-            'winner_skill' => $event->winner->getSkill()
+            'winner_skill' => $event->winner->getSkill(),
+            'date' => $event->payload['date'],
         ]);
         Log::info('Tournament saved: ' . $tournament->id . ' - ' . $tournament->name);
     }

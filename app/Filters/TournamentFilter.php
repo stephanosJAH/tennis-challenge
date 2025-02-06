@@ -17,7 +17,7 @@ class TournamentFilter extends ApiFilter
         'type' => ['eq','in'],
         'winner_name' => ['like', 'eq'],
         'winner_skill' => ['eq', 'gt', 'lt', 'gte', 'lte'],
-        'created_at' => ['like', 'eq', 'gt', 'lt', 'gte', 'lte'],
+        'date' => ['eq', 'gt', 'lt', 'gte', 'lte'],
     ];
 
     /**
@@ -31,7 +31,7 @@ class TournamentFilter extends ApiFilter
         'type' => 'type',
         'winner_name' => 'winner_name',
         'winner_skill' => 'winner_skill',
-        'created_at' => 'created_at',
+        'date' => 'date',
     ];
 
     /**

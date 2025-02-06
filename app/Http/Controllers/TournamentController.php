@@ -11,7 +11,6 @@ use App\Events\TournamentPlayed;
 use App\Http\Resources\TournamentResource;
 use App\Filters\TournamentFilter;
 
-
 /**
  * Class TournamentController.
  * 
@@ -35,6 +34,7 @@ use App\Filters\TournamentFilter;
  *     @OA\Property(property="gender", type="string"),
  *     @OA\Property(property="winner_name", type="string"),
  *     @OA\Property(property="winner_skill", type="integer"),
+ *    @OA\Property(property="date", type="string", format="date"),
  *     @OA\Property(property="created_at", type="string", format="date-time"),
  *     @OA\Property(property="updated_at", type="string", format="date-time")
  * )
@@ -104,17 +104,16 @@ class TournamentController extends Controller
 	 * 		   @OA\Examples(example="lte", value="lte", summary="Filter tournaments by winner_skill less than or equal to value")
      *     ),
 	 * 	   @OA\Parameter(
-     *         name="created_at[operator]",
+     *         name="date[operator]",
      *         in="query",
      *         required=false,
      *         @OA\Schema(type="string"),
-     *         description="Filter tournaments by created_at (like, eq, gt, lt, gte, lte) : created_at[like|eq|gt|lt|gte|lte]=value",
-	 * 		   @OA\Examples(example="like", value="like", summary="Filter tournaments by partial created_at"),
-	 * 		   @OA\Examples(example="eq", value="eq", summary="Filter tournaments by exact created_at"),
-	 * 		   @OA\Examples(example="gt", value="gt", summary="Filter tournaments by created_at greater than value"),
-	 * 		   @OA\Examples(example="lt", value="lt", summary="Filter tournaments by created_at less than value"),
-	 * 		   @OA\Examples(example="gte", value="gte", summary="Filter tournaments by created_at greater than or equal to value"),
-	 * 		   @OA\Examples(example="lte", value="lte", summary="Filter tournaments by created_at less than or equal to value")
+     *         description="Filter tournaments by date (like, eq, gt, lt, gte, lte) : date[like|eq|gt|lt|gte|lte]=value",
+	 * 		   @OA\Examples(example="eq", value="eq", summary="Filter tournaments by exact date"),
+	 * 		   @OA\Examples(example="gt", value="gt", summary="Filter tournaments by date greater than value"),
+	 * 		   @OA\Examples(example="lt", value="lt", summary="Filter tournaments by date less than value"),
+	 * 		   @OA\Examples(example="gte", value="gte", summary="Filter tournaments by date greater than or equal to value"),
+	 * 		   @OA\Examples(example="lte", value="lte", summary="Filter tournaments by date less than or equal to value")
      *     ),
      *     @OA\Response(
      *         response=200,
