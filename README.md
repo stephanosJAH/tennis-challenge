@@ -1,4 +1,4 @@
-# Tennis Challenge Application :tada:
+# Tennis Challenge Application :tennis:
 
 ## Descripción
 
@@ -52,7 +52,7 @@ Utilizado para manejar eventos en la aplicación (`TournamentPlayed`, `SaveTourn
 
 ## Uso
 
-### Endpoints**
+### Endpoints 
 
 **Lista todos los torneos.**
 
@@ -104,11 +104,11 @@ Filtrar por rango de fecha de los torneos
 
 ### Generar torneo
 
-**endpoint**
+**Endpoint**
 
 	POST /api/tournaments
 
-**payload**
+**Payload**
 
 ```
 {
@@ -129,11 +129,7 @@ Filtrar por rango de fecha de los torneos
 }
 ```
 
-### Reglas de Validación
-
-El archivo `StoreTournamentRequest.php` contiene las reglas de validación para la creación de torneos. A continuación se describen las reglas de validación:
-
-### Reglas Generales
+### Reglas Generales de validación
 
 - **name**: 
   - `required`: El nombre del torneo es obligatorio.
@@ -168,7 +164,7 @@ El archivo `StoreTournamentRequest.php` contiene las reglas de validación para 
     - El extra1 del jugador debe ser un número entero.
     - El extra2 del jugador debe ser un número entero (si es masculino).
 
-## documentation :memo:
+## Documentation :memo:
 
 **endpoint**
 
