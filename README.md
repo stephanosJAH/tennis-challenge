@@ -168,6 +168,16 @@ El archivo `StoreTournamentRequest.php` contiene las reglas de validación para 
     - El extra1 del jugador debe ser un número entero.
     - El extra2 del jugador debe ser un número entero (si es masculino).
 
+## documentation :memo:
+
+**endpoint**
+
+	GET /api/documentation
+
+**generar**
+
+	php artisan l5-swagger:generate
+
 
 **Esteban Isaias Campos**
 🤓
